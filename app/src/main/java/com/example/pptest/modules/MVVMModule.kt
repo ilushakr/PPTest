@@ -1,6 +1,6 @@
 package com.example.pptest.modules
 
-import com.example.pptest.Repository
+import com.example.pptest.utils.Repository
 import com.example.pptest.api.Api
 import com.example.pptest.cards.CardsFragmentViewModel
 import com.example.pptest.cards.CardsFragmentViewModelFactory
@@ -8,6 +8,7 @@ import com.example.pptest.mainFragment.MainFragmentViewModel
 import com.example.pptest.mainFragment.MainFragmentViewModelFactory
 import com.example.pptest.room.TransactionsDao
 import com.example.pptest.room.UsersDao
+import com.example.pptest.room.ValuteDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,8 +19,13 @@ import dagger.hilt.android.components.ActivityComponent
 object MVVMModule {
 
     @Provides
-    fun provideRepository(api: Api, usersDatabase: UsersDao, transactionsDatabase: TransactionsDao): Repository {
-        return Repository(api, usersDatabase, transactionsDatabase)
+    fun provideRepository(
+        api: Api,
+        usersDatabase: UsersDao,
+        transactionsDatabase: TransactionsDao,
+        valuteDatabase: ValuteDao
+    ): Repository {
+        return Repository(api, usersDatabase, transactionsDatabase, valuteDatabase)
     }
 
     @Provides

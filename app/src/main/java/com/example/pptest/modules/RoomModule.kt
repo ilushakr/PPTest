@@ -2,10 +2,7 @@ package com.example.pptest.modules
 
 import android.content.Context
 import androidx.room.Room
-import com.example.pptest.room.TransactionsDao
-import com.example.pptest.room.TransactionsDatabase
-import com.example.pptest.room.UsersDao
-import com.example.pptest.room.UsersDatabase
+import com.example.pptest.room.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -46,6 +43,22 @@ object RoomModule {
     @Provides
     fun provideTransactionsDao(transactionsDatabase: TransactionsDatabase): TransactionsDao {
         return transactionsDatabase.transactionsDao()
+    }
+
+    @Provides
+    fun provideValuteDataBase(@ApplicationContext context: Context):ValuteDatabase{
+        return Room.databaseBuilder(
+            context,
+            ValuteDatabase::class.java,
+            ValuteDatabase.NAME
+        )
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Provides
+    fun provideValuteDao(valuteDatabase: ValuteDatabase): ValuteDao {
+        return valuteDatabase.valuteDao()
     }
 
 }

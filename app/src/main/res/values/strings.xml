@@ -7,8 +7,11 @@
     <string name="rub_sign">₽%1$s</string>
 
     <string name="no_internet">Упс, похоже у вас проблемы с интернетом(</string>
-    <string name="retry_message">Вы можете проверить соединение и попробовать еще раз</string>
-    <string name="retry">Ок, пробую еще раз</string>
+    <string name="alert_message">Вы можете:</string>
+    <string name="retry_text">Попробовать снова</string>
+    <string name="saved_data_text">Загрузить предыдущие данные</string>
+    <string name="close_app_text">Выйти из приложения</string>
+
     <string name="main_title">Главная</string>
     <string name="valid_thru">VALID THRU</string>
     <string name="your_balance">Your balance</string>

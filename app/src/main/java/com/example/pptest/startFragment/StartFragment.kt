@@ -3,26 +3,18 @@ package com.example.pptest.startFragment
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import com.example.pptest.R
-import com.example.pptest.mainFragment.HistoryAdapter
 import com.example.pptest.mainFragment.MainFragmentViewModel
 import com.example.pptest.mainFragment.MainFragmentViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.cards_layout.view.*
-import kotlinx.android.synthetic.main.history_layout.view.*
 import javax.inject.Inject
 import android.net.NetworkInfo
 
-import androidx.core.content.ContextCompat.getSystemService
-
 import android.net.ConnectivityManager
-import androidx.core.content.ContextCompat
-import com.example.pptest.AlertFragment
 
 
 @AndroidEntryPoint
@@ -39,7 +31,14 @@ class StartFragment: Fragment(R.layout.start_fragment_layout){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        start()
+        val argument = arguments?.getString("ALERT")
+        if(argument == null || argument == "RETRY") start()
+        if(argument == "SAVED_DATA") {
+            findNavController().navigate(R.id.toMainFragment, Bundle().also { bundle ->
+                bundle.putString("cardNumber", "")
+            })
+        }
+        if(argument == "CLOSE") activity?.finishAffinity()
     }
 
 
@@ -58,12 +57,7 @@ class StartFragment: Fragment(R.layout.start_fragment_layout){
             })
         }
         else{
-//            val bundle = Bundle().also { bundle ->
-//                bundle.putString("cardNumber", "")
-//            }
-//            findNavController().navigate(R.id.toMainFragment, bundle)
-
-            findNavController().navigate(R.id.showAlert)
+            findNavController().navigate(R.id.toAlertFragment)
         }
     }
 

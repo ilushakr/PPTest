@@ -36,20 +36,24 @@
             app:popUpTo="@+id/nav_graph"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/showAlert"
-            app:destination="@id/alertFragment" />
+            android:id="@+id/toAlertFragment"
+            app:destination="@id/alertFragment"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true"/>
     </fragment>
-    <dialog
-        android:id="@+id/alertFragment"
-        android:name="com.example.pptest.AlertFragment"
-        android:label="AlertFragment" >
-        <action
-            android:id="@+id/closeAlert"
-            app:destination="@id/startFragment" />
-    </dialog>
     <fragment
         android:id="@+id/cardsFragment"
         android:name="com.example.pptest.cards.CardsFragment"
         android:label="CardsFragment" />
+    <fragment
+        android:id="@+id/alertFragment"
+        android:name="com.example.pptest.utils.AlertFragment"
+        android:label="AlertFragment" >
+        <action
+            android:id="@+id/fromAlertFragment"
+            app:destination="@id/startFragment"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true"/>
+    </fragment>
 
 </navigation>

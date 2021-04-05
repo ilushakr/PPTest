@@ -2,7 +2,7 @@ package com.example.pptest.mainFragment
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.pptest.Repository
+import com.example.pptest.utils.Repository
 import com.example.pptest.entities.*
 import com.example.pptest.utils.Utils.addChar
 import kotlinx.coroutines.CoroutineScope
@@ -28,6 +28,8 @@ class MainFragmentViewModel @Inject constructor(private val repository: Reposito
     var user = MutableLiveData<UserDB>()
 
     val currencies = MutableLiveData<List<Valute>>()
+
+    var isInternetConnection = true
 
     private var usd = 0.0
     private var gbp = 0.0
@@ -102,6 +104,15 @@ class MainFragmentViewModel @Inject constructor(private val repository: Reposito
                         if(it.name == "GBP") gbp = it.value
                     }
 
+                    CoroutineScope(Dispatchers.IO).launch {
+                        repository.insertValutes(currencies.value!!.map {
+                            ValuteDb(
+                                name = it.name,
+                                value = it.value
+                            )
+                        })
+                    }
+
                     changeHistoryBalance("£", usd / gbp)
 
                     currencyBalance.value = "£${String.format("%.2f", (user.value!!.balance * usd / gbp))}"
@@ -162,5 +173,26 @@ class MainFragmentViewModel @Inject constructor(private val repository: Reposito
         }
 
         return Pair(usersList, transactionsList)
+    }
+
+    fun getValutes() = repository.getValutes()
+
+    fun setCurrencies(valutes: List<ValuteDb>){
+        currencies.value = valutes.map {
+            Valute(
+                name = it.name,
+                value = it.value
+            )
+        }
+
+        currencies.value!!.forEach {
+            if(it.name == "USD") usd = it.value
+            if(it.name == "EUR") eur = it.value
+            if(it.name == "GBP") gbp = it.value
+        }
+
+        changeHistoryBalance("£", usd / gbp)
+
+        currencyBalance.value = "£${String.format("%.2f", (user.value!!.balance * usd / gbp))}"
     }
 }

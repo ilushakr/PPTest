@@ -16,6 +16,7 @@ import com.example.pptest.databinding.MainFragmentLayoutBinding
 import com.example.pptest.entities.TransactionHistory
 import com.example.pptest.entities.TransactionHistoryDB
 import com.example.pptest.entities.UserDB
+import com.example.pptest.entities.Valute
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.cards_layout.view.*
 import kotlinx.android.synthetic.main.currency_layout.view.*
@@ -67,8 +68,8 @@ class MainFragment: Fragment(R.layout.main_fragment_layout), View.OnClickListene
                     this.user = user
                     viewModel.user.value = user
                     getUsersTransactions(view, user)
-                    viewModel.getCurrency().observe(viewLifecycleOwner, { currencies ->
-
+                    viewModel.getValutes().observe(viewLifecycleOwner, { valutes ->
+                        viewModel.setCurrencies(valutes)
                     })
                 }
             })
@@ -99,7 +100,11 @@ class MainFragment: Fragment(R.layout.main_fragment_layout), View.OnClickListene
             viewModel.getUserDb(1).observe(viewLifecycleOwner, { user ->
                 if(user != null){
                     this.user = user
+                    viewModel.user.value = user
                     getUsersTransactions(view, user)
+                    viewModel.getValutes().observe(viewLifecycleOwner, { valutes ->
+                        viewModel.setCurrencies(valutes)
+                    })
                 }
             })
         }
