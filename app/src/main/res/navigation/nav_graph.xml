@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/startFragment">
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.pptest.base.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.pptest.mainFragment.MainFragment"
+        android:label="MyFragment" >
+        <action
+            android:id="@+id/toChangeCard"
+            app:destination="@id/cardsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.example.pptest.startFragment.StartFragment"
+        android:label="StartFragment" >
+        <action
+            android:id="@+id/toMainFragment"
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/showAlert"
+            app:destination="@id/alertFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/alertFragment"
+        android:name="com.example.pptest.AlertFragment"
+        android:label="AlertFragment" >
+        <action
+            android:id="@+id/closeAlert"
+            app:destination="@id/startFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/cardsFragment"
+        android:name="com.example.pptest.cards.CardsFragment"
+        android:label="CardsFragment" />
+
+</navigation>

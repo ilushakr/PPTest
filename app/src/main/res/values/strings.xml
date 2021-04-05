@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">PPTest</string>
+
+    <string name="gbr_sign">£%1$s</string>
+    <string name="eur_sign">€%1$s</string>
+    <string name="usd_sign">$%1$s</string>
+    <string name="rub_sign">₽%1$s</string>
+
+    <string name="no_internet">Упс, похоже у вас проблемы с интернетом(</string>
+    <string name="retry_message">Вы можете проверить соединение и попробовать еще раз</string>
+    <string name="retry">Ок, пробую еще раз</string>
+    <string name="main_title">Главная</string>
+    <string name="valid_thru">VALID THRU</string>
+    <string name="your_balance">Your balance</string>
+    <string name="history_label">History</string>
+    <string name="change_currency">Change currency</string>
+    <string name="my_cards_title">Мои карты</string>
+
+</resources>
