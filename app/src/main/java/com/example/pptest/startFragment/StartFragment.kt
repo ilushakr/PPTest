@@ -57,7 +57,12 @@ class StartFragment: Fragment(R.layout.start_fragment_layout){
             })
         }
         else{
-            findNavController().navigate(R.id.toAlertFragment)
+            viewModel.getUserDb(1).observe(viewLifecycleOwner, {user ->
+                findNavController().navigate(R.id.toAlertFragment, Bundle().also {
+                    it.putBoolean("IS_DB_EMPTY", user == null)
+                })
+            })
+
         }
     }
 
